@@ -1,6 +1,8 @@
 package com.naman.addressbooksystem.controller;
 
 import com.naman.addressbooksystem.dto.AddressBookDataDTO;
+import com.naman.addressbooksystem.dto.ResponseDTO;
+import com.naman.addressbooksystem.model.AddressBookContact;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,33 +11,43 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/addressbook")
 public class AddressBookSystemController {
 
-//    Get All Data
-    @RequestMapping(value = {"","/","/getAll"})
-    public ResponseEntity<String> getAddressBookAllContact(){
-        return new ResponseEntity<>("Get Call Success", HttpStatus.OK);
+    //    Get All Data
+    @RequestMapping(value = {"", "/", "/getAll"})
+    public ResponseEntity<ResponseDTO> getAddressBookAllContact() {
+        AddressBookContact addressBookContact = new AddressBookContact(1, new AddressBookDataDTO("Naman", "Ajmera", "Ajmera Bhawan Chaksu"));
+        ResponseDTO responseDTO = new ResponseDTO("Get Call Success", addressBookContact);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-//    Get Data By ID
+    //    Get Data By ID
     @GetMapping(value = {"/get/{contactId}"})
-    public ResponseEntity<String> getAddressBookContact(@PathVariable("contactId") int contactId){
-        return new ResponseEntity<>("Get Call Success:- "+contactId, HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> getAddressBookContact(@PathVariable("contactId") int contactId) {
+        AddressBookContact addressBookContact=new AddressBookContact(contactId, new AddressBookDataDTO("Naman", "Ajmera", "Chaksu"));
+        ResponseDTO responseDTO=new ResponseDTO("GGet Call Success",addressBookContact);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-//    Post Call
+    //    Post Call
     @PostMapping(value = {"/post/create"})
-    public ResponseEntity<String> createAddressBookContact(@RequestBody AddressBookDataDTO addressBookDataDTO){
-        return new ResponseEntity<>("Post Call Success"+addressBookDataDTO,HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO> createAddressBookContact(@RequestBody AddressBookDataDTO addressBookDataDTO) {
+        AddressBookContact addressBookContact=new AddressBookContact(1,addressBookDataDTO);
+        ResponseDTO responseDTO=new ResponseDTO("Post call Success",addressBookContact);
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
-//    Put Call
+    //    Put Call
     @PutMapping(value = {"/put/update/{contactId}"})
-    public ResponseEntity<String> updateAddressBookContact(@PathVariable("contactId") int contactId,@RequestBody AddressBookDataDTO addressBookDataDTO){
-        return new ResponseEntity<>("Put Call Success "+contactId+":- "+addressBookDataDTO,HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO> updateAddressBookContact(@PathVariable("contactId") int contactId, @RequestBody AddressBookDataDTO addressBookDataDTO) {
+        AddressBookContact addressBookContact=new AddressBookContact(contactId,addressBookDataDTO);
+        ResponseDTO responseDTO=new ResponseDTO("Put Call Success",addressBookContact);
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
-//    Delete Call
+    //    Delete Call
     @DeleteMapping("/delete/{contactId}")
-    public ResponseEntity<String> deleteAddressBookContact(@PathVariable("contactId") int contactId){
-        return new ResponseEntity<>("Delete Call Success "+contactId,HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> deleteAddressBookContact(@PathVariable("contactId") int contactId) {
+        AddressBookContact addressBookContact=new AddressBookContact(contactId, new AddressBookDataDTO("Naman", "Ajmera", "Chaksu"));
+        ResponseDTO responseDTO=new ResponseDTO("Delete Call Success",addressBookContact);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }
