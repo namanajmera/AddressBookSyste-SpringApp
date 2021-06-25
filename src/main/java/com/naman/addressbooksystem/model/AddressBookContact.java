@@ -1,8 +1,17 @@
 package com.naman.addressbooksystem.model;
 
 import com.naman.addressbooksystem.dto.AddressBookDataDTO;
+import lombok.Data;
 
-public class AddressBookContact {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "contact")
+public @Data
+class AddressBookContact {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "contact_id")
     private int contactId;
     private String fullName;
     private String phoneNumber;
@@ -10,6 +19,9 @@ public class AddressBookContact {
     private String city;
     private String state;
     private String zip;
+
+    public AddressBookContact() {
+    }
 
     public AddressBookContact(int contactId, AddressBookDataDTO addressBookDataDTO) {
         this.contactId = contactId;
