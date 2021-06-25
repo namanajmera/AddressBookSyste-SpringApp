@@ -4,10 +4,10 @@ import javax.validation.constraints.Pattern;
 
 public class AddressBookDataDTO {
 
-    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}")
+    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}", message = "Enter the valid firstName")
     public String firstName;
 
-    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}")
+    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}",message = "Enter the valid lastName")
     public String lastName;
 
     public String address;
