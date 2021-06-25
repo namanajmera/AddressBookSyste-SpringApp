@@ -1,29 +1,34 @@
 package com.naman.addressbooksystem.dto;
 
+import lombok.ToString;
+
 import javax.validation.constraints.Pattern;
 
-public class AddressBookDataDTO {
+public @ToString
+class AddressBookDataDTO {
 
-    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}", message = "Enter the valid firstName")
-    public String firstName;
-
-    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z]{2,}",message = "Enter the valid lastName")
-    public String lastName;
+    @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Enter the valid firstName")
+    public String fullName;
 
     public String address;
 
-    public AddressBookDataDTO(String firstName, String lastName, String address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public String city;
+    public String state;
+    public int zip;
+
+    public AddressBookDataDTO(String fullName, String address) {
+        this.fullName = fullName;
         this.address = address;
     }
 
     @Override
     public String toString() {
         return "AddressBookDataDTO{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "fullName='" + fullName + '\'' +
                 ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
                 '}';
     }
 }

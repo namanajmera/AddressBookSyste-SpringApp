@@ -4,15 +4,19 @@ import com.naman.addressbooksystem.dto.AddressBookDataDTO;
 
 public class AddressBookContact {
     private int contactId;
-    private String firstName;
-    private String lastName;
-    private String address;
+    private String fullName;
+    public String address;
+    public String city;
+    public String state;
+    public int zip;
 
     public AddressBookContact(int contactId, AddressBookDataDTO addressBookDataDTO) {
         this.contactId = contactId;
-        this.firstName = addressBookDataDTO.firstName;
-        this.lastName = addressBookDataDTO.lastName;
+        this.fullName = addressBookDataDTO.fullName;
         this.address = addressBookDataDTO.address;
+        this.city=addressBookDataDTO.city;
+        this.state=addressBookDataDTO.state;
+        this.zip=addressBookDataDTO.zip;
     }
 
     public int getContactId() {
@@ -23,20 +27,12 @@ public class AddressBookContact {
         this.contactId = contactId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getAddress() {
