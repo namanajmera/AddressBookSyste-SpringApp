@@ -23,14 +23,27 @@ class AddressBookContact {
     public AddressBookContact() {
     }
 
+    public AddressBookContact(AddressBookDataDTO addressBookDataDTO) {
+        this.updateAddressBookContact(addressBookDataDTO);
+    }
+
+    public void updateAddressBookContact(AddressBookDataDTO addressBookDataDTO) {
+        this.fullName = addressBookDataDTO.fullName;
+        this.phoneNumber = addressBookDataDTO.phoneNumber;
+        this.address = addressBookDataDTO.address;
+        this.city = addressBookDataDTO.city;
+        this.state = addressBookDataDTO.state;
+        this.zip = addressBookDataDTO.zip;
+    }
+
     public AddressBookContact(int contactId, AddressBookDataDTO addressBookDataDTO) {
         this.contactId = contactId;
         this.fullName = addressBookDataDTO.fullName;
-        this.phoneNumber= addressBookDataDTO.phoneNumber;
+        this.phoneNumber = addressBookDataDTO.phoneNumber;
         this.address = addressBookDataDTO.address;
-        this.city=addressBookDataDTO.city;
-        this.state=addressBookDataDTO.state;
-        this.zip=addressBookDataDTO.zip;
+        this.city = addressBookDataDTO.city;
+        this.state = addressBookDataDTO.state;
+        this.zip = addressBookDataDTO.zip;
     }
 
     public int getContactId() {

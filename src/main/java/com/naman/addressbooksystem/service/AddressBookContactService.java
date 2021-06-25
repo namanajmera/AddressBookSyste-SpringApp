@@ -18,25 +18,22 @@ public class AddressBookContactService implements IAddressBookContactService {
     @Autowired
     private IAddressBookRepository iAddressBookRepository;
 
-    private List<AddressBookContact> addressBookContactList=new ArrayList<>();
 
     @Override
     public List<AddressBookContact> getAllContact() {
-        return addressBookContactList;
+        return iAddressBookRepository.findAll();
     }
 
     @Override
     public AddressBookContact getContactById(int contactId) {
-        return addressBookContactList.stream()
-                .filter(addressBookContact -> addressBookContact.getContactId() == contactId)
-                .findFirst()
+        return iAddressBookRepository
+                .findById(contactId)
                 .orElseThrow(()->new AddressBookException("Contact Not Found"));
     }
 
     @Override
     public AddressBookContact createContact(AddressBookDataDTO addressBookDataDTO) {
-        AddressBookContact addressBookContact = new AddressBookContact(addressBookContactList.size()+1, addressBookDataDTO);
-        addressBookContactList.add(addressBookContact);
+        AddressBookContact addressBookContact = new AddressBookContact(addressBookDataDTO);
         log.info("Contact: ",addressBookContact.toString());
         iAddressBookRepository.save(addressBookContact);
         return addressBookContact;
@@ -45,12 +42,13 @@ public class AddressBookContactService implements IAddressBookContactService {
     @Override
     public AddressBookContact updateContact(int contactId, AddressBookDataDTO addressBookDataDTO) {
         AddressBookContact addressBookContact = new AddressBookContact(contactId, addressBookDataDTO);
-        addressBookContactList.set(contactId-1,addressBookContact);
-        return addressBookContact;
+        addressBookContact.updateAddressBookContact(addressBookDataDTO);
+        return iAddressBookRepository.save(addressBookContact);
     }
 
     @Override
     public void deleteContact(int contactId) {
-        addressBookContactList.remove(contactId-1);
+        AddressBookContact addressBookContact=this.getContactById(contactId);
+        iAddressBookRepository.delete(addressBookContact);
     }
 }
