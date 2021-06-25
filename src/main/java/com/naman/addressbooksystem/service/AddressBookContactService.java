@@ -1,6 +1,7 @@
 package com.naman.addressbooksystem.service;
 
 import com.naman.addressbooksystem.dto.AddressBookDataDTO;
+import com.naman.addressbooksystem.exception.AddressBookException;
 import com.naman.addressbooksystem.model.AddressBookContact;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,10 @@ public class AddressBookContactService implements IAddressBookContactService {
 
     @Override
     public AddressBookContact getContactById(int contactId) {
-        return addressBookContactList.get(contactId-1);
+        return addressBookContactList.stream()
+                .filter(addressBookContact -> addressBookContact.getContactId() == contactId)
+                .findFirst()
+                .orElseThrow(()->new AddressBookException("Contact Not Found"));
     }
 
     @Override
