@@ -5,14 +5,16 @@ import com.naman.addressbooksystem.dto.AddressBookDataDTO;
 public class AddressBookContact {
     private int contactId;
     private String fullName;
-    public String address;
-    public String city;
-    public String state;
-    public int zip;
+    private String phoneNumber;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
 
     public AddressBookContact(int contactId, AddressBookDataDTO addressBookDataDTO) {
         this.contactId = contactId;
         this.fullName = addressBookDataDTO.fullName;
+        this.phoneNumber= addressBookDataDTO.phoneNumber;
         this.address = addressBookDataDTO.address;
         this.city=addressBookDataDTO.city;
         this.state=addressBookDataDTO.state;
@@ -41,5 +43,37 @@ public class AddressBookContact {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 }
